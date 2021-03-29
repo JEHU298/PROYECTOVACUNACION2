@@ -1,26 +1,18 @@
 <!doctype html>
-<!-- The DOCTYPE declaration above will set the     -->
-<!-- browser's rendering engine into                -->
-<!-- "Standards Mode". Replacing this declaration   -->
-<!-- with a "Quirks Mode" doctype is not supported. -->
-
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Janusz Białobrzewski" />
+    <meta name="author" content="JEHU ROBERTO PACHECO MAYA" />
     <!--                                                               -->
-    <!-- Consider inlining CSS to reduce the number of requested files -->
+    <!-- Dar enlace con el archivo de estilos css-->
     <!--                                                               -->
     <link type="text/css" rel="stylesheet" href="JsQRScanner.css">
 
-    <!--                                           -->
-    <!-- Any title is fine                         -->
-    <!--                                           -->
     <title>PROYECTO VACUNA JEHÚ PACHECO </title>
     
     <!--                                           -->
-    <!-- This script loads your compiled module.   -->
+    <!-- Agregamos las bibliotecas de js  -->
 	<script type="text/javascript" src="jsPretty/jsqrscanner.nocache.js"></script>
 	<script type="text/javascript" src="jsPretty/9C51964BB0BBCC41BB79120ED90449EA.cache.js"></script>
 	<script type="text/javascript" src="jsPretty/88507C13C1223C3F2A335CFAAA4EF584.cache.js"></script>
@@ -31,7 +23,7 @@
   <body>
 
     <div class="row-element-set row-element-set-QRScanner">
-    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+    <!-- Muestra un mensaje de en caso de no tener habilitado el java script-->
     <noscript>
       <div class="row-element-set error_message">
         JavaScript no está habilitado, habilitelo e intente de nuevo 
@@ -82,6 +74,7 @@
           <div class="FlexPanel form-field-input-panel">
             <textarea id="scannedTextMemoHist" class="textInput form-memo form-field-input textInput-readonly" value="" rows="6" readonly>
             </textarea>
+            <button style="  background-color: #4CAF50;border-radius: 10px 10px 10px 10px;-moz-border-radius: 10px 10px 10px 10px;-webkit-border-radius: 10px 10px 10px 10px;border: 0px solid #000000;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;" onclick="funcionEnviar()">PROCESAR REGISTRO</button> 
           </div>
         </div>
       </div>
@@ -116,7 +109,7 @@
           });
         } 
         
-        return Promise.reject('Your browser does not support getUserMedia');
+        return Promise.reject('Tu navegador no soporta getUserMedia');
     }
 
     function provideVideoQQ()
@@ -134,27 +127,25 @@
         }).then(function(ids){
             if(ids.length === 0)
             {
-              return Promise.reject('Could not find a webcam');
+              return Promise.reject('No hay un dispositivo de camara');
             }
             
             return navigator.mediaDevices.getUserMedia({
                 video: {
                   'optional': [{
-                    'sourceId': ids.length === 1 ? ids[0] : ids[1]//this way QQ browser opens the rear camera
+                    'sourceId': ids.length === 1 ? ids[0] : ids[1]
                     }]
                 }
             });        
         });                
     }
     
-    //this function will be called when JsQRScanner is ready to use
+    //Esta funcion es llamada cuando el escaner esta listo 
     function JsQRScannerReady()
     {
-        //create a new scanner passing to it a callback function that will be invoked when
-        //the scanner succesfully scan a QR code
+        //crea un nuevo escaner pasando para llamar la funcion que sera invocada cuando haya tenido resultado exitoso
         var jbScanner = new JsQRScanner(onQRCodeScanned);
-        //var jbScanner = new JsQRScanner(onQRCodeScanned, provideVideo);
-        //reduce the size of analyzed image to increase performance on mobile devices
+        //reduce el tamaño de la imagen para que sea mas faci lde utilizar en dispositivos moviles 
         jbScanner.setSnapImageMaxSize(300);
     	var scannerParentElement = document.getElementById("scanner");
     	if(scannerParentElement)
@@ -163,6 +154,11 @@
     		jbScanner.appendTo(scannerParentElement);
     	}        
     }
+    //function funcionEnviar(){
+
+    //window.open("formato.php?txtCurp="+curp+"&txtNombres="+nombres+"&txtApellidos="+apellidos+"&txtEntidad="+entidad+"&txtDate="+date);   
+    //window.open("formato.php?escaneo="+scannedText);   
+    //}
   </script>    
   </body>
 </html>
